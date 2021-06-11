@@ -1,9 +1,5 @@
 package game
 
-import (
-	"fmt"
-)
-
 type Player struct{
 	name string
 	status int
@@ -37,4 +33,12 @@ func (p Player) GetStatus() int {
 
 func (p *Player) SetStatus(status int) {
 	p.status = status
+}
+
+func (p Player) GetTeam() int {
+	return p.team
+}
+
+func (p *Player) SetTeam(team int) {
+	p.team = team
 }

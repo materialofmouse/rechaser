@@ -4,8 +4,12 @@ import (
 	"fmt"
 )
 
-type Game struct{}
+type Game struct{
+	sessionID string
+	var field Field
+}
 
-func (g Game) Game
+func (g Game) InitGame() {
+	//initial game
 
 
