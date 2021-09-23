@@ -6,7 +6,7 @@ import (
 
 type Game struct{
 	sessionID string
-	var field Field
+	//var field Field
 }
 
 func (g Game) InitGame() {
