@@ -5,6 +5,12 @@ type Player struct{
 	status int
 	item int
 	team int
+	x int
+	y int
+}
+
+func NewPlayer(name string, status int, team int, ) *Player {
+	return Player{name: name, }
 }
 
 func (p Player) GetName() string {
