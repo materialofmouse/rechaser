@@ -10,7 +10,7 @@ type Player struct{
 }
 
 func NewPlayer(name string, status int, team int, ) *Player {
-	return Player{name: name, }
+	return &Player{name: name, }
 }
 
 func (p Player) GetName() string {
