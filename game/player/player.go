@@ -1,4 +1,16 @@
-package game
+package player
+
+const (
+	UP int = iota
+	DOWN
+	RIGHT
+	LEFT
+)
+
+const (
+	ALIVE = iota
+	DIE
+)
 
 type Player struct{
 	name string
@@ -9,8 +21,16 @@ type Player struct{
 	y int
 }
 
-func NewPlayer(name string, status int, team int, ) *Player {
-	return &Player{name: name, }
+func NewPlayer() *Player {
+	return &Player{}
+}
+
+func (p *Player) InitPlayer(_name string, _team int, _x int, _y int) {
+	p.name = _name
+	p.item = 0
+	p.team = _team
+	p.x = _x
+	p.y = _y
 }
 
 func (p Player) GetName() string {
@@ -47,4 +67,16 @@ func (p Player) GetTeam() int {
 
 func (p *Player) SetTeam(team int) {
 	p.team = team
+}
+
+func (p *Player) Walk(direction int) {
+	if direction == UP {
+		p.y += 1
+	} else if direction == DOWN {
+		p.y -= 1
+	} else if direction == RIGHT {
+		p.x += 1
+	} else if direction == LEFT {
+		p.x -= 1
+	}
 }
