@@ -15,7 +15,7 @@ func (f *Field) InitField(fieldRange int) {
 	f.fields = make([][]int, fieldRange)
 }
 
-func (f Field) GetFields() [][]int {
+func (f Field) getFields() [][]int {
 	return f.fields
 }
 
@@ -45,5 +45,17 @@ func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) []i
 		res = append(res, f.GetElement(x, y))
 		}
 	
+	return res
+}
+
+func (f *Field) GetArroundArray(x int, y int, length int) []int {
+	res := make([]int, length)
+	
+	for i := 0; i < length; i++ {
+		for j := 0; j < length; j++ {
+			res = append(res, f.GetElement(x+i-1, y+j-1))
+		}
+	}
+
 	return res
 }

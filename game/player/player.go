@@ -19,6 +19,7 @@ type Player struct{
 	team int
 	x int
 	y int
+	getReadied bool
 }
 
 func NewPlayer() *Player {
@@ -28,6 +29,7 @@ func NewPlayer() *Player {
 func (p *Player) InitPlayer(_name string, _team int, _x int, _y int) {
 	p.name = _name
 	p.item = 0
+	p.status = ALIVE
 	p.team = _team
 	p.x = _x
 	p.y = _y
@@ -67,6 +69,14 @@ func (p Player) GetTeam() int {
 
 func (p *Player) SetTeam(team int) {
 	p.team = team
+}
+
+func (p *Player) GetX() int {
+	return p.x
+}
+
+func (p *Player) GetY() int {
+	return p.y
 }
 
 func (p *Player) Walk(direction int) {
