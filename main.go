@@ -13,11 +13,6 @@ import (
 	"rechaser/game"
 )
 
-type RoomMessage struct {
-	message string
-	uuid uuid.UUID
-}
-
 func main() {
 	r := gin.Default()
 	
