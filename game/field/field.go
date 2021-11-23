@@ -28,8 +28,10 @@ func (f Field) GetElement(x int, y int) int {
 }
 
 func (f *Field) getValidPosition(x int, y int) bool {
-	//後で書く
-	return true
+	validX := (x >= 0 || x < len(f.getFields()))
+	validY := (y >= 0 || y < len(f.getFields()[0]))
+	
+	return (validX && validY)
 }
 
 //要検討
@@ -41,10 +43,10 @@ func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) []i
 	for i := 0; i < length; i++ {
 		x += dx[direction]
 		y += dy[direction]
-		
+
 		res = append(res, f.GetElement(x, y))
-		}
-	
+	}
+
 	return res
 }
 
