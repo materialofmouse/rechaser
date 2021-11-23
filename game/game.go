@@ -1,8 +1,10 @@
 package game
 
 import (
-	"rechaser/game/player"
 	"rechaser/game/field"
+	"rechaser/game/player"
+
+	"github.com/google/uuid"
 )
 
 const (
@@ -14,18 +16,18 @@ const (
 )
 
 type Game struct{
-	sessionID string
+	sessionID uuid.UUID
 	f field.Field
 	p []*player.Player
 	turn int
 	winner *player.Player
 }
 
-func (g *Game) InitGame(_sessionID string) {
+func (g *Game) InitGame(_sessionID uuid.UUID) {
 	g.sessionID = _sessionID
 }
 
-func (g *Game) InitPlayer(_name string, _team int, _x int, _y int) bool {
+func (g *Game) SetPlayer(_name string, _team int, _x int, _y int) bool {
 	if len(g.p) <= 2{
 		_p := player.NewPlayer()
 		_p.InitPlayer(_name, _team, _x, _y)
@@ -40,7 +42,7 @@ func (g *Game) InitField(fieldRange int) {
 	g.f.InitField(fieldRange)
 }
 
-func (g *Game) Step() {
+func (g *Game) TurnStep() {
 	g.turn++
 }
 
