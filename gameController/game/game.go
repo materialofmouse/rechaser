@@ -85,13 +85,15 @@ func (g *Game) Put(team int, direction int) []int {
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 3)
 }
 
-func (g *Game) Look(team int, direction int) ([]int, error) {
+func (g *Game) Look(team int, direction int) []int {
 	var p = g.GetPlayer(team)
 	return g.f.GetDirectionalArray(p.GetX(), p.GetY(), direction, 9)
 }
 
 func (g *Game) Search(team int, direction int) []int {
 	var p = g.GetPlayer(team)
-	return g.f.GetArroundArray(p.GetX(), p.GetY(), 3)
+	x := g.f.GetTargetX(p.GetX(), direction, 1)
+	y := g.f.GetTargetY(p.GetY(), direction, 1)
+	return g.f.GetArroundArray(x, y, 3)
 }
 
