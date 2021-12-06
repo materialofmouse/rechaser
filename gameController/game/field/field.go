@@ -79,7 +79,7 @@ func (f *Field) getValidPosition(x int, y int) bool {
 }
 
 //要検討
-func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) ([]int, error) {
+func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) []int {
 	res := make([]int, length)
 	for i := 0; i < length; i++ {
 		element := 0
@@ -91,7 +91,7 @@ func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) ([]
 
 		res = append(res, element)
 	}
-	return res, nil
+	return res
 }
 
 func (f *Field) GetArroundArray(x int, y int, length int) []int {
