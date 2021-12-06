@@ -7,40 +7,23 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 
 	"rechaser/connect"
-	"rechaser/game"
+	"rechaser/gameController"
 )
 
 func main() {
 	r := gin.Default()
+	gc := new(gamecontroller.GameController)
 	
 	r.GET("/home", func(c *gin.Context) {
 		c.JSON(200, gin.H{ "message": "home", })
 	})
-	g := make([]*game.Game,0)
-	
-	//r.POST("/room", func())
 
 	r.GET("/create_room", func(c *gin.Context) {
-		var _g game.Game
-		var message string
-		
-		_g.InitField(10)
-		_uuid, err := uuid.NewRandom()
-		fmt.Println(_uuid)
-		if err != nil {
-			message = "plase try again..."
-		} else {
-			message = ""
-		}
-		
-		_g.InitGame(_uuid)
-		g = append(g, &_g)
-		
+		_uuid := gc.CreateRoom()
 		c.JSON(http.StatusOK, gin.H{
-			"message" : string(message),
+			"message" : string("test"),
 			"sessionID" : string(_uuid.String()),
 		})
 	})
@@ -51,6 +34,10 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 			c.Status(http.StatusBadRequest)
+		}
+		g := gc.GetRoom(request.Data.Session)
+		if request.Data.Command.Action == "WALK" {
+			g.GetReady()
 		}
 	})
 
