@@ -5,7 +5,7 @@ type RequestData struct {
 		Session string `json:"session"`
 		Command struct {
 			Action string `json:"action"`
-			Direction string `json:"direction"`
+			Direction int `json:"direction"`
 		} `json:"command"`
 	} `json:"data"`
 }
