@@ -82,18 +82,15 @@ func (f *Field) getValidPosition(x int, y int) bool {
 func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) ([]int, error) {
 	res := make([]int, length)
 	for i := 0; i < length; i++ {
-		x, err := f.GetTargetX(x, direction, i)
-		if err != nil {
-			return nil, nil
+		element := 0
+		x, err1 := f.GetTargetX(x, direction, i)
+		y, err2 := f.GetTargetY(y, direction, i)
+		if (err1 != nil && err2 != nil) {
+			element = f.GetElement(x, y)
 		}
-		y, err := f.GetTargetY(y, direction, i)
-		if err != nil {
-			return nil, nil
-		}
-		
-		res = append(res, f.GetElement(x, y))
-	}
 
+		res = append(res, element)
+	}
 	return res, nil
 }
 
