@@ -50,27 +50,35 @@ func (g *Game) GetReady(p *player.Player) []int {
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 1)
 }
 
+func (g *Game) GetPlayer(team int) *player.Player {
+	if team == g.p[0].GetTeam() {
+		return g.p[0]
+	} else {
+		return g.p[1]
+	}
+}
+
 func (g *Game) GetSessionID() uuid.UUID {
 	return g.sessionID
 }
 
-func (g *Game) Walk(p *player.Player, direction int) []int {
-	//player walk
+func (g *Game) Walk(team int, direction int) []int {
+	var p = g.GetPlayer(team)
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 3)
 }
 
-func (g *Game) Put(p *player.Player, direction int) []int {
-	//player put
+func (g *Game) Put(team int, direction int) []int {
+	var p = g.GetPlayer(team)
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 3)
 }
 
-func (g *Game) Look(p *player.Player, direction int) []int {
-	//player look
+func (g *Game) Look(team int, direction int) []int {
+	var p = g.GetPlayer(team)
 	return g.f.GetDirectionalArray(p.GetX(), p.GetY(), direction, 9)
 }
 
-func (g *Game) Search(p *player.Player, direction int) []int {
-	//player search
+func (g *Game) Search(team int, direction int) []int {
+	var p = g.GetPlayer(team)
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 3)
 }
 
