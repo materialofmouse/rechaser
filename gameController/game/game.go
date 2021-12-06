@@ -27,6 +27,10 @@ func (g *Game) InitGame(_sessionID uuid.UUID) {
 	g.sessionID = _sessionID
 }
 
+func (g *Game) InitField(fieldRange int) {
+	g.f.InitField(fieldRange)
+}
+
 func (g *Game) SetPlayer(_name string, _team int, _x int, _y int) bool {
 	if len(g.p) <= 2{
 		_p := player.NewPlayer()
@@ -36,18 +40,6 @@ func (g *Game) SetPlayer(_name string, _team int, _x int, _y int) bool {
 	} else {
 		return false
 	}
-}
-
-func (g *Game) InitField(fieldRange int) {
-	g.f.InitField(fieldRange)
-}
-
-func (g *Game) TurnStep() {
-	g.turn++
-}
-
-func (g *Game) GetReady(p *player.Player) []int {
-	return g.f.GetArroundArray(p.GetX(), p.GetY(), 1)
 }
 
 func (g *Game) GetPlayer(team int) *player.Player {
@@ -60,6 +52,15 @@ func (g *Game) GetPlayer(team int) *player.Player {
 
 func (g *Game) GetSessionID() uuid.UUID {
 	return g.sessionID
+}
+
+func (g *Game) TurnStep() {
+	g.turn++
+}
+
+// actions
+func (g *Game) GetReady(p *player.Player) []int {
+	return g.f.GetArroundArray(p.GetX(), p.GetY(), 1)
 }
 
 func (g *Game) Walk(team int, direction int) []int {
