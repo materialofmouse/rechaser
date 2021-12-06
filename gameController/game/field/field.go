@@ -24,7 +24,7 @@ func (f *Field) SetElement(element int, x int , y int) bool {
 	}
 }
 
-func (f *Field) MoveElement(element int, x int, y int, direction int, stride int) bool {
+func (f *Field) MoveElement(element int, x int, y int, direction int, stride int) int {
 	now_x, now_y := x, y
 	dx := []int{1, 0, -1, 0}
 	dy := []int{0, 1, 0, -1}
@@ -32,7 +32,20 @@ func (f *Field) MoveElement(element int, x int, y int, direction int, stride int
 	now_x += dx[direction] * stride
 	now_y += dy[direction] * stride
 	
-	return (f.SetElement(WALL, x, y) && f.SetElement(element, now_x, now_y))
+	if (f.SetElement(GROUND, x, y) && f.SetElement(element, now_x, now_y)) {
+		return f.GetElement(now_x, now_y)
+	} else {
+		return -1
+	}
+}
+
+func (f Field) collisionCheck(x int, y int, x1 int, y1 int) int {
+	elm1 := f.GetElement(x, y)
+	if (elm1 == WALL) {
+		return WALL
+	} else {	
+		return GROUND
+	}
 }
 
 func (f Field) getFields() [][]int {
