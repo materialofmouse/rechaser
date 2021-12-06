@@ -1,7 +1,5 @@
 package field
 
-import "errors"
-
 const (
 	GROUND = iota
 	WALL
@@ -51,24 +49,18 @@ func (f Field) GetElement(x int, y int) int {
 	}
 }
 
-func (f Field) GetTargetX(x int, direction int, length int) (int, error) {
+func (f Field) GetTargetX(x int, direction int, length int) int {
 	dx := []int{1, 0, -1, 0}
 	x += dx[direction]
-	if f.getValidPosition(x, 0) {
-		return x, nil
-	} else {
-		return 0, errors.New("target X is out of range")
-	}
+	
+	return x
 }
 
-func (f Field) GetTargetY(y int, direction int, length int) (int, error) {
+func (f Field) GetTargetY(y int, direction int, length int) int {
 	dy := []int{0, 1, 0, -1}
 	y += dy[direction]
-	if f.getValidPosition(0, y) {
-		return y, nil
-	} else {
-		return 0, errors.New("target Y is out of range")
-	}
+	
+	return y
 }
 
 func (f *Field) getValidPosition(x int, y int) bool {
@@ -81,13 +73,11 @@ func (f *Field) getValidPosition(x int, y int) bool {
 //要検討
 func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) []int {
 	res := make([]int, length)
+
 	for i := 0; i < length; i++ {
-		element := 0
-		x, err1 := f.GetTargetX(x, direction, i)
-		y, err2 := f.GetTargetY(y, direction, i)
-		if (err1 != nil && err2 != nil) {
-			element = f.GetElement(x, y)
-		}
+		x := f.GetTargetX(x, direction, i)
+		y := f.GetTargetY(y, direction, i)
+		element := f.GetElement(x, y)
 
 		res = append(res, element)
 	}
@@ -98,9 +88,9 @@ func (f *Field) GetArroundArray(x int, y int, length int) []int {
 	res := make([]int, length*length)
 	
 	for i := 0; i < length; i++ {
-		for j := 0; j < length; j++ {
-			res = append(res, f.GetElement(x+i-1, y+j-1))
-		}
+		element := f.GetElement(x+i-1, y+i-1)
+
+		res = append(res,element)
 	}
 
 	return res
