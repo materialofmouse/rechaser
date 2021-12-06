@@ -51,7 +51,7 @@ func (f *Field) GetDirectionalArray(x int, y int, direction int, length int) []i
 }
 
 func (f *Field) GetArroundArray(x int, y int, length int) []int {
-	res := make([]int, length)
+	res := make([]int, length*length)
 	
 	for i := 0; i < length; i++ {
 		for j := 0; j < length; j++ {
