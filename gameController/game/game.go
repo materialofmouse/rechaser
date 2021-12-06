@@ -1,8 +1,8 @@
 package game
 
 import (
-	"rechaser/game/field"
-	"rechaser/game/player"
+	"rechaser/gameController/game/field"
+	"rechaser/gameController/game/player"
 
 	"github.com/google/uuid"
 )
@@ -48,6 +48,10 @@ func (g *Game) TurnStep() {
 
 func (g *Game) GetReady(p *player.Player) []int {
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 1)
+}
+
+func (g *Game) GetSessionID() uuid.UUID {
+	return g.sessionID
 }
 
 func (g *Game) Walk(p *player.Player, direction int) []int {
