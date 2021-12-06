@@ -79,14 +79,14 @@ func (p *Player) GetY() int {
 	return p.y
 }
 
-func (p *Player) Walk(direction int) {
+func (p *Player) Walk(direction int, stride int) {
 	if direction == UP {
-		p.y += 1
+		p.y += stride
 	} else if direction == DOWN {
-		p.y -= 1
+		p.y -= stride
 	} else if direction == RIGHT {
-		p.x += 1
+		p.x += stride
 	} else if direction == LEFT {
-		p.x -= 1
+		p.x -= stride
 	}
 }
