@@ -1,2 +1,0 @@
-# rechaser
-web版chaserサーバー
