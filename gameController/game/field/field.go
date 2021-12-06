@@ -15,6 +15,15 @@ func (f *Field) InitField(fieldRange int) {
 	f.fields = make([][]int, fieldRange)
 }
 
+func (f *Field) SetElement(element int, x int , y int) bool {
+	if (f.getValidPosition(x, y)) {
+		f.fields[x][y] = element
+		return true
+	} else {
+		return false
+	}
+}
+
 func (f Field) getFields() [][]int {
 	return f.fields
 }
