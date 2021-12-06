@@ -24,6 +24,17 @@ func (f *Field) SetElement(element int, x int , y int) bool {
 	}
 }
 
+func (f *Field) MoveElement(element int, x int, y int, direction int, stride int) bool {
+	now_x, now_y := x, y
+	dx := []int{1, 0, -1, 0}
+	dy := []int{0, 1, 0, -1}
+	
+	now_x += dx[direction] * stride
+	now_y += dy[direction] * stride
+	
+	return (f.SetElement(WALL, x, y) && f.SetElement(element, now_x, now_y))
+}
+
 func (f Field) getFields() [][]int {
 	return f.fields
 }
