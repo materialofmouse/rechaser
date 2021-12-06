@@ -65,15 +65,27 @@ func (g *Game) GetReady(p *player.Player) []int {
 
 func (g *Game) Walk(team int, direction int) []int {
 	var p = g.GetPlayer(team)
+	targetElement := g.f.MoveElement(field.ENEMY, p.GetX(), p.GetY(), direction, 1)
+	p.Walk(direction, 1)
+	
+	if (targetElement == field.WALL) {
+		p.SetStatus(0)
+	} else if (targetElement == field.ITEM) {
+		p.AddItem()
+	}
+	
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 3)
 }
 
 func (g *Game) Put(team int, direction int) []int {
 	var p = g.GetPlayer(team)
+	x := p.GetX()
+	y := p.GetY()
+	g.f.SetElement(field.WALL, x, y)
 	return g.f.GetArroundArray(p.GetX(), p.GetY(), 3)
 }
 
-func (g *Game) Look(team int, direction int) []int {
+func (g *Game) Look(team int, direction int) ([]int, error) {
 	var p = g.GetPlayer(team)
 	return g.f.GetDirectionalArray(p.GetX(), p.GetY(), direction, 9)
 }
